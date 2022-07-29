@@ -7,35 +7,35 @@
         android:id="@+id/menu_main"
         android:enabled="true"
         android:icon="@drawable/ic_navi_home"
-        android:title="首页"
+        android:title="@string/tab_text_1"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_activity"
         android:enabled="true"
         android:icon="@drawable/ic_navi_activity"
-        android:title="活动"
+        android:title="@string/tab_text_2"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_center"
         android:enabled="true"
         android:icon="@drawable/ic_navi_square"
-        android:title="广场"
+        android:title="@string/tab_text_3"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_message"
         android:enabled="true"
         android:icon="@drawable/ic_navi_message"
-        android:title="消息"
+        android:title="@string/tab_text_4"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/menu_me"
         android:enabled="true"
         android:icon="@drawable/ic_navi_me"
-        android:title="我的"
+        android:title="@string/tab_text_5"
         app:showAsAction="always" />
 
 </menu>

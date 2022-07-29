@@ -10,14 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.firstapp.R
 import com.example.firstapp.databinding.FragmentMainBinding
+import com.example.firstapp.databinding.FragmentMeBinding
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class PlaceholderFragment : Fragment() {
+class MeFragment : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
-    private var _binding: FragmentMainBinding? = null
+    private var _binding: FragmentMeBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,7 +27,7 @@ class PlaceholderFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProvider(this).get(PageViewModel::class.java).apply {
-           // setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
+            // setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
             setContent(arguments?.getString(ARG_SECTION_CONTENT) ?: "hello")
 
         }
@@ -37,13 +38,13 @@ class PlaceholderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        _binding = FragmentMeBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        val textView: TextView = binding.sectionLabel
+        val tvMe: TextView = binding.tvMe
         pageViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-
+            tvMe.text = it
+            binding.tvContent.text = "content"
         })
         return root
     }
@@ -61,8 +62,8 @@ class PlaceholderFragment : Fragment() {
          * number.
          */
         @JvmStatic
-        fun newInstance(sectionNumber: Int): PlaceholderFragment {
-            return PlaceholderFragment().apply {
+        fun newInstance(sectionNumber: Int): MeFragment {
+            return MeFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECTION_NUMBER, sectionNumber)
                 }
@@ -70,8 +71,8 @@ class PlaceholderFragment : Fragment() {
         }
 
         @JvmStatic
-        fun newInstance(sectionContent: String): PlaceholderFragment {
-            return PlaceholderFragment().apply {
+        fun newInstance(sectionContent: String): MeFragment {
+            return MeFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_SECTION_CONTENT, sectionContent)
                 }

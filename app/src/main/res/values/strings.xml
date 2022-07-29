@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">FirstJetpack</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_1">首页</string>
+    <string name="tab_text_2">活动</string>
+    <string name="tab_text_3">广场</string>
+    <string name="tab_text_4">消息</string>
+    <string name="tab_text_5">我的</string>
 </resources>
