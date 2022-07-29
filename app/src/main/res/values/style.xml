@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="navigation_view_text_normal">
+        <!-- 这里设置textColor不好使，需要在itemTextColor中设置color的selector -->
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="navigation_view_text_selected">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+</resources>
