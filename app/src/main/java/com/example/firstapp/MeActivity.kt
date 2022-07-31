@@ -55,7 +55,7 @@ class MeActivity : AppCompatActivity() {
     private fun initListener() {
         binding.collapsingToolbar
         binding.appbar.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-            override fun onStateChanged(appBarLayout: AppBarLayout?, state: State?) {
+            override fun onStateChanged(appBarLayout: AppBarLayout?, state: State? ) {
                 if (state == State.COLLAPSED) {
                     StatusBarUtil.setDarkMode(this@MeActivity)
                 } else

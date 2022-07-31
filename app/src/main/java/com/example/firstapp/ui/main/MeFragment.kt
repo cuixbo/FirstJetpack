@@ -1,9 +1,12 @@
 package com.example.firstapp.ui.main
 
+import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowMetrics
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -17,6 +20,7 @@ import com.example.firstapp.databinding.FragmentMeBinding
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.leaf.library.StatusBarUtil
+import kotlin.math.abs
 
 /**
  * A placeholder fragment containing a simple view.
@@ -62,12 +66,33 @@ class MeFragment : Fragment() {
         val mePagerAdapter = MePagerAdapter(requireContext(), childFragmentManager)
         vpContent.adapter = mePagerAdapter
 
+        println(resources.displayMetrics.toString())
+
         binding.appbar.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-            override fun onStateChanged(appBarLayout: AppBarLayout?, state: State?) {
+
+            val titleHeight = dip2px(requireContext(), 48F + 24F)
+            override fun onStateChanged(
+                appBarLayout: AppBarLayout?,
+                state: State?
+            ) {
                 if (state == State.COLLAPSED) {
                     StatusBarUtil.setDarkMode(requireActivity())
-                } else
+                } else {
                     StatusBarUtil.setLightMode(requireActivity())
+                }
+            }
+
+            override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+                super.onOffsetChanged(appBarLayout, verticalOffset)
+                appBarLayout?.let {
+                    if (abs(verticalOffset) > it.totalScrollRange - titleHeight) {
+                        binding.toolbar.setBackgroundColor(Color.WHITE)
+                        StatusBarUtil.setColor(requireActivity(), Color.WHITE)
+                    } else {
+                        binding.toolbar.setBackgroundColor(Color.TRANSPARENT)
+                        StatusBarUtil.setColor(requireActivity(), Color.TRANSPARENT)
+                    }
+                }
             }
 
         })
@@ -110,6 +135,24 @@ class MeFragment : Fragment() {
                 }
             }
         }
+
+        /**
+         * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+         */
+        fun dip2px(context: Context, dpValue: Float): Int {
+            val scale: Float = context.resources.displayMetrics.density;
+            return (dpValue * scale + 0.5f).toInt();
+        }
+
+        /**
+         * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+         */
+        fun px2dip(context: Context, pxValue: Float): Int {
+            val scale: Float = context.resources.displayMetrics.density;
+            return (pxValue / scale + 0.5f).toInt();
+        }
+
+
     }
 
     override fun onDestroyView() {

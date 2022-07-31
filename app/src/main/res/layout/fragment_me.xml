@@ -22,8 +22,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="280dp"
-            android:fitsSystemWindows="true"
             android:clipChildren="false"
+            android:fitsSystemWindows="true"
             app:contentScrim="#f9f9f9"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@android:color/transparent"
@@ -72,9 +72,6 @@
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-        <View android:layout_width="392dp"
-            android:background="#ff0033"
-            android:layout_height="4dp"/>
 
         <!-- tabs -->
         <com.google.android.material.tabs.TabLayout
@@ -83,11 +80,11 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:background="#fff"
-            app:tabMaxWidth="88dp"
             app:tabIndicatorAnimationMode="elastic"
             app:tabIndicatorColor="#fd8000"
             app:tabIndicatorFullWidth="false"
             app:tabIndicatorHeight="4dp"
+            app:tabMaxWidth="88dp"
             app:tabSelectedTextColor="#666"
             app:tabTextColor="#939393"
             tools:background="#3300ff" />
@@ -98,8 +95,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"

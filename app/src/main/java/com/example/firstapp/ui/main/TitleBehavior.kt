@@ -9,10 +9,6 @@ import com.google.android.material.appbar.AppBarLayout
 class TitleBehavior(context: Context?, attrs: AttributeSet?) :
     AppBarLayout.ScrollingViewBehavior(context, attrs) {
 
-    init {
-        println("cxb-3333333")
-    }
-
     override fun onStartNestedScroll(
         coordinatorLayout: CoordinatorLayout,
         child: View,
@@ -21,7 +17,7 @@ class TitleBehavior(context: Context?, attrs: AttributeSet?) :
         axes: Int,
         type: Int
     ): Boolean {
-        println("cxb-3333333")
+        println("cxb-1-${target.scrollY}-${child.top}-${child.scrollY}")
         return super.onStartNestedScroll(
             coordinatorLayout,
             child,
@@ -41,7 +37,7 @@ class TitleBehavior(context: Context?, attrs: AttributeSet?) :
         axes: Int,
         type: Int
     ) {
-        println("cxb-3333333")
+
         super.onNestedScrollAccepted(
             coordinatorLayout,
             child,
@@ -59,7 +55,7 @@ class TitleBehavior(context: Context?, attrs: AttributeSet?) :
         target: View,
         type: Int
     ) {
-        println("cxb-3333333")
+
         super.onStopNestedScroll(coordinatorLayout, child, target, type)
     }
 
@@ -76,7 +72,7 @@ class TitleBehavior(context: Context?, attrs: AttributeSet?) :
         consumed: IntArray
     ) {
 
-        println("cxb-onNestedScroll")
+
         super.onNestedScroll(
             coordinatorLayout,
             child,
@@ -100,7 +96,7 @@ class TitleBehavior(context: Context?, attrs: AttributeSet?) :
         consumed: IntArray,
         type: Int
     ) {
-        println("cxb-3333333")
+        println("cxb-2-${target.scrollY}-${dx}-${dy}")
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
     }
 
@@ -112,7 +108,7 @@ class TitleBehavior(context: Context?, attrs: AttributeSet?) :
         velocityY: Float,
         consumed: Boolean
     ): Boolean {
-        println("cxb-3333333")
+
         return super.onNestedFling(coordinatorLayout, child, target, velocityX, velocityY, consumed)
     }
 
@@ -123,7 +119,7 @@ class TitleBehavior(context: Context?, attrs: AttributeSet?) :
         velocityX: Float,
         velocityY: Float
     ): Boolean {
-        println("cxb-3333333")
+
         return super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY)
     }
 

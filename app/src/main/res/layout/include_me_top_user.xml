@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_top_user"
     android:layout_width="match_parent"
-    android:layout_height="125dp"
+    android:layout_height="wrap_content"
+    android:minHeight="105dp"
     android:background="@drawable/me_appbar_bg"
     android:clipChildren="false"
     android:orientation="vertical">
@@ -14,7 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_user"
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="0dp"
+        android:layout_weight="1.0"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:padding="8dp">
