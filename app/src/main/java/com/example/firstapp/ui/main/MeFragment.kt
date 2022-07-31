@@ -5,12 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.firstapp.R
 import com.example.firstapp.databinding.FragmentMainBinding
 import com.example.firstapp.databinding.FragmentMeBinding
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.tabs.TabLayout
+import com.leaf.library.StatusBarUtil
 
 /**
  * A placeholder fragment containing a simple view.
@@ -23,6 +29,9 @@ class MeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private lateinit var tlTabs: TabLayout
+    private lateinit var vpContent: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +49,31 @@ class MeFragment : Fragment() {
 
         _binding = FragmentMeBinding.inflate(inflater, container, false)
         val root = binding.root
+        tlTabs = binding.tlTabs
+        vpContent = binding.vpContent
+        tlTabs.setupWithViewPager(vpContent)
 
-        val tvMe: TextView = binding.tvMe
+        val activity = requireActivity() as AppCompatActivity
+        activity.apply {
+            setSupportActionBar(binding.toolbar)
+        }
+//        binding.toolbar.title = "小黄盖666"
+
+        val mePagerAdapter = MePagerAdapter(requireContext(), childFragmentManager)
+        vpContent.adapter = mePagerAdapter
+
+        binding.appbar.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+            override fun onStateChanged(appBarLayout: AppBarLayout?, state: State?) {
+                if (state == State.COLLAPSED) {
+                    StatusBarUtil.setDarkMode(requireActivity())
+                } else
+                    StatusBarUtil.setLightMode(requireActivity())
+            }
+
+        })
+
         pageViewModel.text.observe(viewLifecycleOwner, Observer {
-            tvMe.text = it
-            binding.tvContent.text = "content"
+
         })
         return root
     }

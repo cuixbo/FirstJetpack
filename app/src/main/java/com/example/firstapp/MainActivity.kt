@@ -1,18 +1,16 @@
 package com.example.firstapp
 
+import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import com.example.firstapp.ui.main.SectionsPagerAdapter
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.example.firstapp.databinding.ActivityMainBinding
+import com.example.firstapp.ui.main.SectionsPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.tabs.TabLayout
+import com.leaf.library.StatusBarUtil
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         initView()
         initListener()
 
-
 //        bottomNavigationView.itemIconSize = 0
 
 //        bottomNavigationView.add
@@ -38,10 +35,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
 //        tabs = binding.tabs
+
+        //这两句设为透明状态栏，5.0之前是不适配的，可以在这里加安卓版本判断条件
+//        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        window.statusBarColor = Color.TRANSPARENT
+
+//        StatusBarUtil.setTransparentForWindow(this);
+//        StatusBarUtil.setPaddingTop(this,binding.appBar)
+
+
+//        StatusBarUtil.setTranslucentForImageView(this, 0, null);
+
         viewPager = binding.includeMain.viewPager
         bottomNavigationView = binding.includeMain.bnvNavigation
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         viewPager.adapter = sectionsPagerAdapter
+        viewPager.currentItem = 4
 //        tabs.setupWithViewPager(viewPager)
     }
 

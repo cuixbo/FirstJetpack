@@ -5,4 +5,9 @@
     <string name="tab_text_3">广场</string>
     <string name="tab_text_4">消息</string>
     <string name="tab_text_5">我的</string>
+
+    <string name="tab_me_1">精选</string>
+    <string name="tab_me_2">微博</string>
+    <string name="tab_me_3">相册</string>
+
 </resources>
