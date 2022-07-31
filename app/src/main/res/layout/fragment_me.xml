@@ -6,13 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-
     app:statusBarBackground="@android:color/transparent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:clipChildren="false"
         android:fitsSystemWindows="true"
@@ -22,8 +21,9 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
 
             android:layout_width="match_parent"
-            android:layout_height="175dp"
+            android:layout_height="280dp"
             android:fitsSystemWindows="true"
+            android:clipChildren="false"
             app:contentScrim="#f9f9f9"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@android:color/transparent"
@@ -38,12 +38,17 @@
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.6" />
 
+            <include
+                android:id="@+id/include_me_top_user"
+                layout="@layout/include_me_top_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom" />
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-
                 app:contentInsetLeft="0dp"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin">
@@ -67,119 +72,25 @@
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+        <View android:layout_width="392dp"
+            android:background="#ff0033"
+            android:layout_height="4dp"/>
 
-        <!--  顶部: user + tabs  -->
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <!-- tabs -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_tabs"
             android:layout_width="match_parent"
-            android:layout_height="125dp"
-            android:background="@drawable/me_appbar_bg"
-            android:clipChildren="false"
-            android:orientation="vertical">
-
-            <!-- user info -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_user"
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:padding="8dp">
-
-                <FrameLayout
-                    android:id="@+id/fl_avatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/iv_avatar"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="-32dp"
-                        android:padding="2dp"
-                        android:src="@drawable/img_avatar"
-                        app:shapeAppearance="@style/circle_image"
-                        app:strokeColor="@color/white"
-                        app:strokeWidth="4dp" />
-                </FrameLayout>
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginBottom="6dp"
-                    android:text="小黄盖666"
-                    android:textColor="#333"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/tv_fans"
-                    app:layout_constraintLeft_toRightOf="@+id/fl_avatar" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_fans"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="粉丝 179"
-                    app:layout_constraintBottom_toTopOf="@+id/tv_desc"
-
-                    app:layout_constraintLeft_toLeftOf="@id/tv_name"
-                    app:layout_constraintLeft_toRightOf="@+id/fl_avatar" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_follow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="关注 270"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/tv_fans"
-                    app:layout_constraintLeft_toRightOf="@+id/tv_fans" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="转评赞 346"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/tv_fans"
-
-                    app:layout_constraintLeft_toRightOf="@+id/tv_follow" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="来自大自然的礼物"
-                    app:layout_constraintBottom_toBottomOf="parent"
-
-                    app:layout_constraintLeft_toLeftOf="parent" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#dbdbdb"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-            <!-- tabs -->
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tl_tabs"
-                android:layout_width="240dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:background="#fff"
-                app:tabIndicatorAnimationMode="elastic"
-                app:tabIndicatorColor="#fd8000"
-                app:tabIndicatorFullWidth="false"
-                app:tabIndicatorHeight="4dp"
-                app:tabSelectedTextColor="#666"
-                app:tabTextColor="#939393"
-                tools:background="#3300ff" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="#fff"
+            app:tabMaxWidth="88dp"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicatorColor="#fd8000"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorHeight="4dp"
+            app:tabSelectedTextColor="#666"
+            app:tabTextColor="#939393"
+            tools:background="#3300ff" />
 
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -187,11 +98,13 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
+
             android:layout_height="match_parent"
             tools:context=".ui.main.PlaceholderFragment">
 

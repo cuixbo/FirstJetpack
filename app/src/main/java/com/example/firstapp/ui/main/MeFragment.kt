@@ -72,6 +72,9 @@ class MeFragment : Fragment() {
 
         })
 
+
+
+
         pageViewModel.text.observe(viewLifecycleOwner, Observer {
 
         })

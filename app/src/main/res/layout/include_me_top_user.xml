@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  顶部: user + tabs  -->
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_top_user"
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:background="@drawable/me_appbar_bg"
+    android:clipChildren="false"
+    android:orientation="vertical">
+
+    <!-- user info -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_user"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:padding="8dp">
+
+        <FrameLayout
+            android:id="@+id/fl_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="-32dp"
+                android:padding="2dp"
+                android:src="@drawable/img_avatar"
+                app:shapeAppearance="@style/circle_image"
+                app:strokeColor="@color/white"
+                app:strokeWidth="4dp" />
+        </FrameLayout>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="6dp"
+            android:text="小黄盖666"
+            android:textColor="#333"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_fans"
+            app:layout_constraintLeft_toRightOf="@+id/fl_avatar" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_fans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="粉丝 179"
+            app:layout_constraintBottom_toTopOf="@+id/tv_desc"
+
+            app:layout_constraintLeft_toLeftOf="@id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/fl_avatar" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="关注 270"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_fans"
+            app:layout_constraintLeft_toRightOf="@+id/tv_fans" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="转评赞 346"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_fans"
+
+            app:layout_constraintLeft_toRightOf="@+id/tv_follow" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="来自大自然的礼物"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#dbdbdb"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
