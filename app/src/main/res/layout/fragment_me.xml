@@ -25,6 +25,7 @@
             android:clipChildren="false"
             android:fitsSystemWindows="true"
             app:contentScrim="#f9f9f9"
+
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@android:color/transparent"
             app:titleEnabled="false">
@@ -48,14 +49,14 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 app:contentInsetLeft="0dp"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <TextView

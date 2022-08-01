@@ -1,26 +1,25 @@
 package com.example.firstapp.ui.main
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowMetrics
-import android.widget.TextView
+import androidx.annotation.Dimension
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
-import com.example.firstapp.R
-import com.example.firstapp.databinding.FragmentMainBinding
 import com.example.firstapp.databinding.FragmentMeBinding
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.leaf.library.StatusBarUtil
 import kotlin.math.abs
+
 
 /**
  * A placeholder fragment containing a simple view.
@@ -70,7 +69,11 @@ class MeFragment : Fragment() {
 
         binding.appbar.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
 
-            val titleHeight = dip2px(requireContext(), 48F + 24F)
+            val userHeight = dpToPx(requireContext(), 105)
+            val titleHeight = dpToPx(requireContext(), 48)
+            val collapseHeight = dpToPx(requireContext(), 280)
+            val statusBarHeight = getStatusBarHeight(requireContext())
+
             override fun onStateChanged(
                 appBarLayout: AppBarLayout?,
                 state: State?
@@ -85,12 +88,15 @@ class MeFragment : Fragment() {
             override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
                 super.onOffsetChanged(appBarLayout, verticalOffset)
                 appBarLayout?.let {
-                    if (abs(verticalOffset) > it.totalScrollRange - titleHeight) {
+                    // 处理收起时，toolbar标题栏的变色
+                    if (abs(verticalOffset) > it.totalScrollRange - userHeight) {
                         binding.toolbar.setBackgroundColor(Color.WHITE)
                         StatusBarUtil.setColor(requireActivity(), Color.WHITE)
+                        StatusBarUtil.setDarkMode(requireActivity())
                     } else {
                         binding.toolbar.setBackgroundColor(Color.TRANSPARENT)
                         StatusBarUtil.setColor(requireActivity(), Color.TRANSPARENT)
+                        StatusBarUtil.setLightMode(requireActivity())
                     }
                 }
             }
@@ -150,6 +156,38 @@ class MeFragment : Fragment() {
         fun px2dip(context: Context, pxValue: Float): Int {
             val scale: Float = context.resources.displayMetrics.density;
             return (pxValue / scale + 0.5f).toInt();
+        }
+
+        fun dpToPx(context: Context, @Dimension(unit = Dimension.DP) dp: Int): Float {
+            val r = context.resources
+            return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp.toFloat(),
+                r.displayMetrics
+            )
+        }
+
+        // 获取状态栏高度
+        fun getStatusBarHeight(context: Context): Int {
+            var result = 0
+            val resourceId =
+                context.resources.getIdentifier("status_bar_height", "dimen", "android")
+            if (resourceId > 0) {
+                result = context.resources.getDimensionPixelSize(resourceId)
+            }
+            return result
+        }
+
+        // 获取导航栏高度
+        fun getNavigationBarHeight(context: Context): Int {
+            var result = 0
+            val resources: Resources = context.resources
+            val resourceId: Int =
+                resources.getIdentifier("navigation_bar_height", "dimen", "android")
+            if (resourceId > 0) {
+                result = resources.getDimensionPixelSize(resourceId)
+            }
+            return result
         }
 
 
