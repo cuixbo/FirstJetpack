@@ -31,6 +31,7 @@
             app:titleEnabled="false">
 
             <ImageView
+                android:id="@+id/iv_user_bg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
@@ -139,5 +140,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+    <!--    <TextView-->
+    <!--        android:layout_width="20dp"-->
+    <!--        android:layout_height="20dp"-->
+    <!--        android:background="#ff0"-->
+    <!--        android:text="hello"-->
+    <!--        app:layout_behavior="com.example.firstapp.ui.main.DependencyBehavior" />-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

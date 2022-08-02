@@ -79,6 +79,7 @@ class MeFragment : Fragment() {
                 state: State?
             ) {
                 if (state == State.COLLAPSED) {
+
                     StatusBarUtil.setDarkMode(requireActivity())
                 } else {
                     StatusBarUtil.setLightMode(requireActivity())
@@ -90,10 +91,12 @@ class MeFragment : Fragment() {
                 appBarLayout?.let {
                     // 处理收起时，toolbar标题栏的变色
                     if (abs(verticalOffset) > it.totalScrollRange - userHeight) {
+                        binding.tvToolbarTitle.visibility = View.VISIBLE
                         binding.toolbar.setBackgroundColor(Color.WHITE)
                         StatusBarUtil.setColor(requireActivity(), Color.WHITE)
                         StatusBarUtil.setDarkMode(requireActivity())
                     } else {
+                        binding.tvToolbarTitle.visibility = View.INVISIBLE
                         binding.toolbar.setBackgroundColor(Color.TRANSPARENT)
                         StatusBarUtil.setColor(requireActivity(), Color.TRANSPARENT)
                         StatusBarUtil.setLightMode(requireActivity())
