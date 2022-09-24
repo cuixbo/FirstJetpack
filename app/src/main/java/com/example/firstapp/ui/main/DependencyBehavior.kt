@@ -4,16 +4,19 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.NestedScrollView
 import com.example.firstapp.R
+import com.google.android.material.tabs.TabLayout
 
-class DependencyBehavior : CoordinatorLayout.Behavior<TextView> {
+class DependencyBehavior : CoordinatorLayout.Behavior<View> {
     var width: Int = 0
 
-    var ivUserBg: ImageView? = null
     var rawTop: Int = Int.MAX_VALUE
+
+    var tabLayout: View? = null
+    var userTop: View? = null
 
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         context?.apply {
@@ -21,49 +24,50 @@ class DependencyBehavior : CoordinatorLayout.Behavior<TextView> {
         }
     }
 
-
     override fun layoutDependsOn(
         parent: CoordinatorLayout,
-        child: TextView,
+        child: View,
         dependency: View
     ): Boolean {
-//        println("Behavior-child:  ${child.toString()}")
-//        println("Behavior-dependency:  ${dependency.toString()}")
-        if (dependency.id == R.id.iv_user_bg) println("********")
-        if (ivUserBg == null) {
-            ivUserBg = parent.findViewById<ImageView>(R.id.iv_user_bg)
-        }
-        if (rawTop == Int.MAX_VALUE) {
-            rawTop = dependency.top
-        }
-
-
+        tryInitView(parent, dependency)
         return dependency is NestedScrollView
     }
 
     override fun onDependentViewChanged(
         parent: CoordinatorLayout,
-        child: TextView,
+        child: View,
         dependency: View
     ): Boolean {
-
-        val top = dependency.top;
-        val left = dependency.left;
-
-        val x = width - left - child.width;
-        val y = top * 2;
-
-
-        child.translationX = x.toFloat()
-        child.translationY = y.toFloat()
-//        setPosition(child, x, y);
-        ivUserBg?.apply {
-            this.scaleY = (1F*(dependency.top - rawTop) / this.height).toFloat()+1
-            this.scaleX = (1F*(dependency.top - rawTop) / this.height).toFloat()+1
-
-            println("!!!!!!${this.scaleY},${dependency.top},${this.height}")
+        if (rawTop == Int.MAX_VALUE) {
+            rawTop = dependency.top
         }
+        val top = dependency.top;
 
+        tabLayout?.let {
+            if (top <= rawTop) {
+                it.translationY = 0F
+            } else {
+                it.translationY = (top - rawTop).toFloat()
+            }
+            println("onDependentViewChanged:${rawTop},${top},${it.translationY},")
+
+        }
+        userTop?.let {
+            if (top <= rawTop) {
+                it.translationY = 0F
+            } else {
+                it.translationY = (top - rawTop).toFloat()
+            }
+        }
         return true
+    }
+
+    private fun tryInitView(parent: CoordinatorLayout, dependency: View) {
+        tabLayout ?: run {
+            tabLayout = parent.findViewById(R.id.tl_tabs)
+        }
+        userTop ?: run {
+            userTop = parent.findViewById(R.id.include_me_top_user)
+        }
     }
 }

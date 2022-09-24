@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_home" />
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/btn_goToMe"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="80dp"
+
+        android:text="我的" />
+
+    <Button
+        android:id="@+id/btn_goToMore"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="120dp"
+
+        android:text="更多" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

@@ -1,19 +1,27 @@
 package com.example.firstapp.ui.main
 
+import android.app.ActivityManager
 import android.content.Context
+import android.content.Context.ACTIVITY_SERVICE
+import android.content.Intent
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.annotation.Dimension
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
+import com.example.firstapp.BeautyActivity
 import com.example.firstapp.databinding.FragmentMeBinding
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
@@ -60,6 +68,7 @@ class MeFragment : Fragment() {
         activity.apply {
             setSupportActionBar(binding.toolbar)
         }
+        getMemory()
 //        binding.toolbar.title = "小黄盖666"
 
         val mePagerAdapter = MePagerAdapter(requireContext(), childFragmentManager)
@@ -106,13 +115,58 @@ class MeFragment : Fragment() {
 
         })
 
-
+        binding.ivUserBg.setOnClickListener {
+            startActivity(Intent(requireContext(), BeautyActivity::class.java))
+        }
 
 
         pageViewModel.text.observe(viewLifecycleOwner, Observer {
 
         })
         return root
+    }
+
+    fun getMemory() {
+        val runtime = Runtime.getRuntime()
+        val activityManager =
+            requireContext().getSystemService(ACTIVITY_SERVICE) as ActivityManager?
+        //最大分配内存
+        val memory = activityManager!!.memoryClass
+        //最大分配内存获取方法2
+        val maxMemory = (runtime.maxMemory() / (1024 * 1024)).toFloat()
+        //当前分配的总内存
+        val totalMemory = (runtime.totalMemory() / (1024 * 1024)).toFloat()
+        //剩余内存
+        val freeMemory = (runtime.freeMemory() / (1024 * 1024)).toFloat()
+
+        println("memory: $memory")
+        println("maxMemory: $maxMemory")
+        println("totalMemory: $totalMemory")
+        println("freeMemory: $freeMemory")
+
+        val metrics: DisplayMetrics = resources.displayMetrics
+        resources.configuration.densityDpi
+        val wm: WindowManager? = getSystemService(requireContext(), WindowManager::class.java)
+        val metrics2 = DisplayMetrics()
+
+        wm!!.defaultDisplay.getRealMetrics(metrics2)
+        wm?.let {
+            wm.defaultDisplay.getRealMetrics(metrics2)
+//            println("wm.currentWindowMetrics:${wm.currentWindowMetrics.toString()}")
+//            println("wm.maximumWindowMetrics:${wm.maximumWindowMetrics.toString()}")
+
+
+        }
+
+        println("densityDpi:${metrics.densityDpi}")    // 440
+        println("metrics:${metrics.toString()}") // DisplayMetrics{density=2.75, width=1080, height=2276, scaledDensity=2.75, xdpi=394.705, ydpi=394.307}
+        println("metrics2:${metrics2.toString()}")// DisplayMetrics{density=2.75, width=1080, height=2400, scaledDensity=2.75, xdpi=394.705, ydpi=394.307}
+        println("resources.configuration.densityDpi:${resources.configuration.densityDpi}")// esources.configuration.densityDpi:440
+        //  1080x1080+2400x2400 开平方 = 2631.81   2631.8/6.67 =394.57  394.57 /160 = 2.46
+        //  1080x1080+2276x2276 开平方 = 2519.24   2519.24/6.67=377.70  377.70 /160 = 2.36
+        //  1080x1080+2728x2728 开平方 = 2934.8    2934.8/6.67=440 440 /160 = 2.75
+
+
     }
 
     companion object {

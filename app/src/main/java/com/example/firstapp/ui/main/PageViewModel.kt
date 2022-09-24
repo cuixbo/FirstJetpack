@@ -11,10 +11,11 @@ class PageViewModel : ViewModel() {
 
     private val _index = MutableLiveData<Int>()
     private val _content = MutableLiveData<String>()
+    private val _refreshAction = MutableLiveData<Boolean>()
     val text: LiveData<String> = Transformations.map(_content) {
         it
     }
-
+    val refresh: MutableLiveData<Boolean> = _refreshAction
 
     fun setIndex(index: Int) {
         _index.value = index
@@ -23,5 +24,10 @@ class PageViewModel : ViewModel() {
     fun setContent(content: String) {
         _content.value = content
     }
+
+    fun setRefresh(refresh: Boolean) {
+        _refreshAction.value = refresh
+    }
+
 
 }
