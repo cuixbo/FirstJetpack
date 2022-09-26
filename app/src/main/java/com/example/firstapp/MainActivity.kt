@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        StatusBarUtil.setTransparentForWindow(this);
+//        StatusBarUtil.setTransparentForWindow(this);
         viewPager = binding.includeMain.viewPager
         bottomNavigationView = binding.includeMain.bnvNavigation
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)

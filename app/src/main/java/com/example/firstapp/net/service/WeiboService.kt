@@ -1,5 +1,6 @@
-package com.example.firstapp.net
+package com.example.firstapp.net.service
 
+import com.example.firstapp.net.FeedsListResponse
 import retrofit2.Call
 import retrofit2.http.*
 

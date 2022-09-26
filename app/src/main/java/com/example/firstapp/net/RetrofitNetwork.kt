@@ -1,6 +1,8 @@
 package com.example.firstapp.net
 
 import android.util.Log
+import com.example.firstapp.net.service.JokeService
+import com.example.firstapp.net.service.WeiboService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
