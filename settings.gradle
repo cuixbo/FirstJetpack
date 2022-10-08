@@ -4,16 +4,25 @@ pluginManagement {
         google()
         mavenCentral()
 
-
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        maven { url 'https://jitpack.io' }
         google()
         mavenCentral()
-        maven { url 'https://www.jitpack.io' }
+        // 改为阿里云的镜像地址
+//        maven { url 'https://maven.aliyun.com/repository/central' }
+//        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+//        maven { url 'https://maven.aliyun.com/repository/public' }
+
+
     }
+
 }
+
 rootProject.name = "FirstJetpack"
 include ':app'

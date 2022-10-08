@@ -3,7 +3,6 @@ package com.example.firstapp.ui.weibo
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.GridView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
@@ -11,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.firstapp.databinding.ItemFeedBinding
-import com.example.firstapp.net.FeedsListResponse.Feed
+import com.example.firstapp.net.bean.FeedsListResponse.Feed
 
 class FeedAdapter(private val data: List<Feed>) : Adapter<FeedViewHolder>() {
     private val options = RequestOptions().override(Target.SIZE_ORIGINAL)

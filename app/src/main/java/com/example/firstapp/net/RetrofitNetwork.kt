@@ -12,13 +12,13 @@ import kotlin.coroutines.suspendCoroutine
 
 object RetrofitNetwork {
     //获取最新笑话列表
-    private val jokeService = ServiceCreator.create(JokeService::class.java)
-    private val weiboService = ServiceCreator.create(WeiboService::class.java)
+    private val jokeService = RetrofitClient.create(JokeService::class.java)
+    val weiboService = RetrofitClient.create(WeiboService::class.java)
 
     suspend fun searchJokes(page: Int, pageSize: Int) = jokeService.getJokes(page, pageSize).await()
 
     suspend fun getHotTimelineFeeds(page: Int, pageSize: Int) =
-        weiboService.getHotTimelineFeeds().await()
+        weiboService.getHotTimelineFeeds()
 
     private suspend fun <T> Call<T>.await(): T {
         Log.d("suspendCoroutine", request().toString())

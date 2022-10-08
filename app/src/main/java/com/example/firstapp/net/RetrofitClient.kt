@@ -10,7 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ServiceCreator {
+object RetrofitClient {
 
 //    "https://weibo.com/ajax/feed/hottimeline?refresh=2&group_id=102803&containerid=102803&extparam=discover%7Cnew_feed&max_id=2&count=10"
 
@@ -22,12 +22,13 @@ object ServiceCreator {
 //            .addHeader("Authorization-Type", "apikey")
             .build()
         val response = chain.proceed(request)
-//        println("xbc")
-        // println("xbc" + response.body()?.string())
+
         response
     }
+
     private val loggingInterceptor =
-        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+
     private val okHttpClient = OkHttpClient.Builder()
 //        .addInterceptor(headerInterceptor)
         .addInterceptor(loggingInterceptor)
@@ -40,8 +41,10 @@ object ServiceCreator {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create(gson))
+//        .addConverterFactory(ScalarsConverterFactory.create())
+
+        .client(okHttpClient)
         .build()
 
 

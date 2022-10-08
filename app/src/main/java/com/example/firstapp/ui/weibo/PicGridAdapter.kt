@@ -28,7 +28,7 @@ class PicGridAdapter(val context: Context, private val data: List<String>) : Bas
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        println("cxb - getView")
+//        println("cxb - getView")
         val holder: ViewHolder
         var view: View? = null
         if (convertView == null) {

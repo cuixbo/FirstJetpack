@@ -1,12 +1,11 @@
-package com.example.firstapp.net
+package com.example.firstapp.net.bean
 
 import com.example.firstapp.utils.TimeUtil
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.text.SimpleDateFormat
 import java.util.*
 
-data class FeedsListResponse(
+data class FeedDetailResponse(
     val ok: Int,
     val statuses: List<Feed>,
     @SerializedName("total_number") val totalNumber: Int,
